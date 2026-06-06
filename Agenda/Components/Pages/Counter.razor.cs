@@ -1,35 +1,26 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Data;
+﻿using Agenda.Services;
+using Microsoft.AspNetCore.Components;
 
 namespace Agenda.Components.Pages
 {
     public partial class Counter
     {
+        [Inject] private ContactoService ContactoService { get; set; }
+
         private int currentCount = 0;
 
-        private void IncrementCount()
+        private async Task IncrementCount()
         {
             currentCount++;
+            await Ejecutacomando2();
 
-            //cadena de conexion usando credenciales sql server
-            //string connectionString = "Server=localhost;Database=AgendaDb;User Id=sa;Password=your_password;";
-            //cadena de conexion usando autenticacion integrada de windows
-            string connectionString = "Server=localhost;Database=AgendaDb;Trusted_Connection=True;TrustServerCertificate=True";
+        }
 
-            SqlConnection connection = new SqlConnection(connectionString);
 
-            string query = "INSERT INTO Contactos (Nombre, Apellido, Telefono, CorreoElectronico)" +
-                " VALUES ('Hector','Denogean','6627200912','hdenogeancruz@gmail.com')";
 
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.CommandType = CommandType.Text;
-
-            connection.Open();
-
-            command.ExecuteNonQuery();
-
-            connection.Close();
+        private async Task Ejecutacomando2()
+        {
+            await ContactoService.AgregarContactoAsync("Hector", "Denogean", "6627200912", "g@gmail.com");
         }
     }
 }

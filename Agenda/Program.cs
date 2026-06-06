@@ -1,4 +1,7 @@
 using Agenda.Components;
+using Agenda.Data;
+using Agenda.Data.Commands;
+using Agenda.Services;
 
 namespace Agenda
 {
@@ -11,6 +14,17 @@ namespace Agenda
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            //Inyección de dependencias
+            builder.Services.AddScoped<SQLServer>(_ => new SQLServer(connectionString));
+
+            builder.Services.AddScoped<ContactoCommand>();
+            builder.Services.AddScoped<ContactoService>();
+
+
+
 
             var app = builder.Build();
 
