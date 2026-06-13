@@ -20,7 +20,7 @@ namespace Agenda.Components.Pages
 
         private async Task Ejecutacomando2()
         {
-            await ContactoService.AgregarContactoAsync("Hector", "Denogean", "6627200912", "g@gmail.com");
+            //await ContactoService.AgregarContactoAsync("Hector", "Denogean", "6627200912", "g@gmail.com");
         }
     }
 }

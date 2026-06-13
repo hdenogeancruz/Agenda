@@ -1,5 +1,6 @@
 ﻿using Agenda.Data.Commands;
 using Agenda.Data.Dtos;
+using Agenda.Data.Entities;
 
 namespace Agenda.Services
 {
@@ -11,16 +12,16 @@ namespace Agenda.Services
             _contactoCommand = contactoCommand;
         }
 
-        public async Task AgregarContactoAsync(string nombre, string apellido, string telefono, string correoElectronico)
+        public async Task AgregarContactoAsync(ContactoNuevoDto contactoNuevoDto)
         {
             try
             {
-                var contacto = new ContactoNuevoDto
+                var contacto = new Contacto
                 {
-                    Nombre = nombre,
-                    Apellido = apellido,
-                    Telefono = telefono,
-                    CorreoElectronico = correoElectronico
+                    Nombre = contactoNuevoDto.Nombre,
+                    Apellido = contactoNuevoDto.Apellido,
+                    Telefono = contactoNuevoDto.Telefono,
+                    CorreoElectronico = contactoNuevoDto.CorreoElectronico
                 };
                 int afectados = await _contactoCommand.InsertarContactoAsync(contacto);
 

@@ -1,4 +1,5 @@
 ﻿using Agenda.Data.Dtos;
+using Agenda.Data.Entities;
 using Microsoft.Data.SqlClient;
 
 namespace Agenda.Data.Commands
@@ -12,7 +13,7 @@ namespace Agenda.Data.Commands
            _sqlServer = sqlServer;
         }
 
-        public async Task<int> InsertarContactoAsync(ContactoNuevoDto contacto)
+        public async Task<int> InsertarContactoAsync(Contacto contacto)
         {
             string query = "INSERT INTO Contactos (Nombre, Apellido, Telefono, CorreoElectronico) " +
                            "VALUES (@Nombre, @Apellido, @Telefono, @CorreoElectronico)";
